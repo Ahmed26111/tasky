@@ -1,0 +1,15 @@
+<svg width="85" height="85" viewBox="0 0 85 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="42.5" cy="42.5" r="42.5" fill="#F0F0F0"/>
+
+    <!-- Profile Icon Shapes -->
+    <g fill="#B0B0B0">
+        <!-- Head -->
+        <circle cx="42.5" cy="35" r="13"/>
+        <!-- Shoulders/Torso -->
+        <path d="M42.5 52C32 52 23 58.5 20 68C24.5 76.5 33 82 42.5 82C52 82 60.5 76.5 65 68C62 58.5 53 52 42.5 52Z"/>
+    </g>
+
+    <!-- Border (Optional, can be removed if not needed) -->
+    <circle cx="42.5" cy="42.5" r="41.5" stroke="#E0E0E0" stroke-width="2"/>
+</svg>
