@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
-import 'package:tasky/core/Widgets/task_item_widget.dart';
+import 'package:tasky/core/components/task_item_widget.dart';
 import 'package:tasky/models/task_model.dart';
 
 class TasksListWidget extends StatelessWidget {

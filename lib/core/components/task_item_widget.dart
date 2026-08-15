@@ -7,7 +7,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/models/task_model.dart';
 
 import '../shared/shared_preferences_manager.dart';
-import 'custom_text_form_field.dart';
+import '../Widgets/custom_text_form_field.dart';
 
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({super.key, required this.taskModel, required this.onChanged, required this.onDelete, required this.onEdit});

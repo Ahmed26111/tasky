@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/core/utility/task_utility.dart';
 
-import '../../core/Widgets/tasks_list_widget.dart';
+import '../../core/components/tasks_list_widget.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 import '../../models/task_model.dart';
 
