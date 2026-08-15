@@ -7,11 +7,11 @@ import 'package:tasky/core/Widgets/achieved_tasks_widget.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/core/utility/task_utility.dart';
 import 'package:tasky/models/task_model.dart';
-import 'package:tasky/screens/add_task_screen.dart';
+import 'package:tasky/features/add_task/add_task_screen.dart';
 
-import '../core/Widgets/high_priority_tasks_widget.dart';
-import '../core/Widgets/sliver_tasks_list_widget.dart';
-import '../core/shared/shared_preferences_manager.dart';
+import '../../core/Widgets/high_priority_tasks_widget.dart';
+import '../../core/Widgets/sliver_tasks_list_widget.dart';
+import '../../core/shared/shared_preferences_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

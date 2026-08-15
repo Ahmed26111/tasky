@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 
-import '../core/shared/shared_preferences_manager.dart';
+import '../../core/shared/shared_preferences_manager.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({super.key});

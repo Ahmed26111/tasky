@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
-import 'package:tasky/screens/home_screen.dart';
-import 'package:tasky/screens/main_screen.dart';
+import 'package:tasky/features/home/home_screen.dart';
+import 'package:tasky/features/navigation/main_screen.dart';
 
-import '../core/shared/shared_preferences_manager.dart';
+import '../../core/shared/shared_preferences_manager.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
