@@ -9,6 +9,7 @@ import 'package:tasky/core/utility/task_utility.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/features/add_task/add_task_screen.dart';
 
+import '../../core/constants/storage_key.dart';
 import 'components/high_priority_tasks_widget.dart';
 import 'components/sliver_tasks_list_widget.dart';
 import '../../core/shared/shared_preferences_manager.dart';
@@ -41,19 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _loadUsername() {
     setState(() {
-      _username = SharedPreferencesManager().getString('username') ?? 'Guest';
+      _username = SharedPreferencesManager().getString(StorageKey.usernameKey) ?? 'Guest';
     });
   }
 
   void _loadMotivationQuote()  {
     setState(() {
       _motivationQuote =
-          SharedPreferencesManager().getString('motivation_quote') ??
+          SharedPreferencesManager().getString(StorageKey.motivationQuoteKey) ??
               "One task at a time. One step closer.";
     });
   }
   void _loadTasks()  {
-    final tasksBeforeDecode = SharedPreferencesManager().getString("tasks");
+    final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
     if (tasksBeforeDecode != null) {
       final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
       setState(() {
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   void _loadImage(){
     setState(() {
-      final String? imagePath = SharedPreferencesManager().getString('image');
+      final String? imagePath = SharedPreferencesManager().getString(StorageKey.imageKey);
       if(imagePath != null){
         _profileImage = File(imagePath);
       }
@@ -214,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     final tasksBeforeEncode = _tasks.map((task) => task.toMap()).toList();
     await SharedPreferencesManager().setString(
-      "tasks",
+      StorageKey.tasksKey,
       jsonEncode(tasksBeforeEncode),
     );
   }

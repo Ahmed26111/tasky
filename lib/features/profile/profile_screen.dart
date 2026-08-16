@@ -10,6 +10,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/profile/user_details_screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _loadUsername(){
     setState(() {
-      _username = SharedPreferencesManager().getString('username') ?? 'Guest';
+      _username = SharedPreferencesManager().getString(StorageKey.usernameKey) ?? 'Guest';
       isLoading = false;
     });
   }
@@ -42,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _loadMotivationQuote()  {
     setState(() {
       _motivationQuote =
-          SharedPreferencesManager().getString('motivation_quote') ??
+          SharedPreferencesManager().getString(StorageKey.motivationQuoteKey) ??
           "One task at a time. One step closer.";
       isLoading = false;
     });
@@ -50,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _loadImage(){
     setState(() {
-      final String? imagePath = SharedPreferencesManager().getString('image');
+      final String? imagePath = SharedPreferencesManager().getString(StorageKey.imageKey);
       if(imagePath != null){
         selectedImage = File(imagePath);
       }
@@ -199,10 +200,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ListTile(
                   onTap: () async {
                     //! remove all data
-                    await SharedPreferencesManager().remove("username");
-                    await SharedPreferencesManager().remove("motivation_quote");
-                    await SharedPreferencesManager().remove("tasks");
-                    await SharedPreferencesManager().remove("image");
+                    await SharedPreferencesManager().remove(StorageKey.usernameKey);
+                    await SharedPreferencesManager().remove(StorageKey.motivationQuoteKey);
+                    await SharedPreferencesManager().remove(StorageKey.tasksKey);
+                    await SharedPreferencesManager().remove(StorageKey.imageKey);
 
                     Navigator.pushAndRemoveUntil(
                       context,
@@ -277,7 +278,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _saveImage(XFile file)async{
       final Directory appDirectory = await getApplicationDocumentsDirectory();
       final File newFile = await File(file.path).copy("${appDirectory.path}/${file.name}");
-      await SharedPreferencesManager().setString("image", newFile.path);
+      await SharedPreferencesManager().setString(StorageKey.imageKey, newFile.path);
   }
 
 }

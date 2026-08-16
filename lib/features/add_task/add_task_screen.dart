@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 import 'package:tasky/models/task_model.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -89,7 +90,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
                       List<dynamic> tasks = [];
 
-                      final tasksBeforeDecode = SharedPreferencesManager().getString("tasks");
+                      final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
 
                       if (tasksBeforeDecode != null) {
                         tasks = jsonDecode(tasksBeforeDecode) as List<dynamic>;
@@ -105,7 +106,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       tasks.add(newTask.toMap());
 
                       final String tasksEncode = jsonEncode(tasks);
-                      await SharedPreferencesManager().setString("tasks", tasksEncode);
+                      await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
 
                       Navigator.pop(context , true);
                     }

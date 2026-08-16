@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../../core/components/tasks_list_widget.dart';
+import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 import '../../core/utility/task_utility.dart';
 import '../../models/task_model.dart';
@@ -24,7 +25,7 @@ class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
   }
 
   void _loadTasks() async {
-    final tasksBeforeDecode = SharedPreferencesManager().getString("tasks");
+    final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
     if (tasksBeforeDecode != null) {
       final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
       setState(() {

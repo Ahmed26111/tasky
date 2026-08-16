@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 
 class UserDetailsScreen extends StatefulWidget {
@@ -26,14 +27,14 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
   void _loadUsername() async {
     setState(() {
-      _usernameController.text = SharedPreferencesManager().getString('username') ?? 'Guest';
+      _usernameController.text = SharedPreferencesManager().getString(StorageKey.usernameKey) ?? 'Guest';
     });
   }
 
   void _loadMotivationQuote() async {
     setState(() {
       _motivationQuoteController.text =
-          SharedPreferencesManager().getString('motivation_quote') ??
+          SharedPreferencesManager().getString(StorageKey.motivationQuoteKey) ??
               "One task at a time. One step closer.";
     });
   }
@@ -79,8 +80,8 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 child: FilledButton(
                   onPressed: () async {
                     if (_globalKey.currentState?.validate() ?? false){
-                       await SharedPreferencesManager().setString('username', _usernameController.text);
-                       await SharedPreferencesManager().setString('motivation_quote', _motivationQuoteController.text);
+                       await SharedPreferencesManager().setString(StorageKey.usernameKey, _usernameController.text);
+                       await SharedPreferencesManager().setString(StorageKey.motivationQuoteKey, _motivationQuoteController.text);
 
                        Navigator.pop(context , true);
                     }

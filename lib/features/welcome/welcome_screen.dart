@@ -5,6 +5,7 @@ import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 import 'package:tasky/features/home/home_screen.dart';
 import 'package:tasky/features/navigation/main_screen.dart';
 
+import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -109,7 +110,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               await SharedPreferencesManager().setString(
-                                'username',
+                                StorageKey.usernameKey,
                                 _nameController.text,
                               );
                               Navigator.pushReplacement(
