@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
-import 'package:tasky/features/home/home_controller.dart';
+import 'package:tasky/features/tasks/tasks_controller.dart';
+
+import '../../../core/enums/task_status_enum.dart';
 
 class SliverTasksListWidget extends StatelessWidget {
   const SliverTasksListWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (BuildContext context, HomeController controller, Widget? child) {
+    return Consumer<TasksController>(
+      builder: (BuildContext context, TasksController controller, Widget? child) {
         return (controller.tasks.isNotEmpty)
                 ? SliverPadding(
                     padding: const EdgeInsets.only(bottom: 50),
@@ -18,7 +20,7 @@ class SliverTasksListWidget extends StatelessWidget {
                         return TaskItemWidget(
                           taskModel: controller.tasks[index],
                           onChanged: (bool? value) {
-                            controller.updateIsDoneOfTask(index, value);
+                            controller.updateIsDoneOfTask(index, value ,TaskStatus.all);
                           },
                           onDelete: controller.deleteTask,
                           onEdit: controller.loadTasks,

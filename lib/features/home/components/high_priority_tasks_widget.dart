@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
+import 'package:tasky/core/enums/task_status_enum.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
-import 'package:tasky/features/home/home_controller.dart';
+import 'package:tasky/features/tasks/tasks_controller.dart';
 import 'package:tasky/models/task_model.dart';
 import 'package:tasky/features/tasks/high_priority_screen.dart';
 
@@ -12,9 +12,9 @@ class HighPriorityTasksWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (BuildContext context, HomeController controller, Widget? child) {
-        final List<TaskModel> taskPriority = controller.tasks.where((task)=>task.isHighPriority).toList().reversed.toList();
+    return Consumer<TasksController>(
+      builder: (BuildContext context, TasksController controller, Widget? child) {
+        final List<TaskModel> taskPriority = controller.highPriorityTasks.reversed.toList();
         return Card(
           color: Theme.of(context).colorScheme.primaryContainer,
           shape: RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                                 value: taskPriority[index].isDone,
                                 onChanged: (bool? value) {
                                   int indexOfAllTask = controller.tasks.indexWhere((task) => task.id == taskPriority[index].id);
-                                  controller.updateIsDoneOfTask(indexOfAllTask, value);
+                                  controller.updateIsDoneOfTask(indexOfAllTask, value , TaskStatus.all);
                                 },
                               ),
                               Expanded(

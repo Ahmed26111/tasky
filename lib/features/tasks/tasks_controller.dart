@@ -13,6 +13,9 @@ class TasksController with ChangeNotifier{
   List<TaskModel> todoTasks = [];
   List<TaskModel> completedTasks = [];
   List<TaskModel> highPriorityTasks = [];
+  int totalDoneTasks = 0;
+  int totalTasks = 0;
+  double percentOfDone = 0;
 
   void loadTasks(){
     final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
@@ -22,6 +25,7 @@ class TasksController with ChangeNotifier{
       todoTasks = tasks.where((task) => !task.isDone).toList();
       completedTasks = tasks.where((task) => task.isDone).toList();
       highPriorityTasks = tasks.where((task) => task.isHighPriority).toList();
+      calculateDoneTasksPercent();
     }
     notifyListeners();
   }
@@ -31,6 +35,7 @@ class TasksController with ChangeNotifier{
       TaskStatus.todo => todoTasks,
       TaskStatus.completed => completedTasks,
       TaskStatus.highPriority => highPriorityTasks,
+      TaskStatus.all => tasks,
     };
     TaskUtility.updateIsDoneTaskInDatabase(value, index, updatedTasks);
     loadTasks(); //? refresh screen
@@ -39,6 +44,12 @@ class TasksController with ChangeNotifier{
   void deleteTask(int id){
     TaskUtility.deleteTaskFromDatabase(id);
     loadTasks(); //? Refresh Screen
+  }
+
+  void calculateDoneTasksPercent() {
+    totalTasks = tasks.length;
+    totalDoneTasks = completedTasks.length;
+    percentOfDone = (totalTasks == 0) ? 0 : totalDoneTasks / totalTasks;
   }
 
 }

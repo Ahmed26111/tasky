@@ -9,22 +9,19 @@ class HighPriorityScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksController>(
-      create: (_) => TasksController()..loadTasks(),
-      child: Scaffold(
-        appBar: AppBar(title: Text("High Priority Tasks")),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Consumer<TasksController>(
-            builder: (BuildContext context, TasksController controller,_) {
-              return TasksListWidget(
-                tasks: controller.highPriorityTasks,
-                onChanged: (value, index) => controller.updateIsDoneOfTask(index, value , TaskStatus.highPriority),
-                onEdit:controller.loadTasks,
-                onDelete: controller.deleteTask,
-              );
-            },
-          ),
+    return Scaffold(
+      appBar: AppBar(title: Text("High Priority Tasks")),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Consumer<TasksController>(
+          builder: (BuildContext context, TasksController controller,_) {
+            return TasksListWidget(
+              tasks: controller.highPriorityTasks,
+              onChanged: (value, index) => controller.updateIsDoneOfTask(index, value , TaskStatus.highPriority),
+              onEdit:controller.loadTasks,
+              onDelete: controller.deleteTask,
+            );
+          },
         ),
       ),
     );

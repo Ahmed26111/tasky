@@ -8,34 +8,31 @@ class CompletedTasksScreen extends StatelessWidget{
   const CompletedTasksScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<TasksController>(
-      create: (_) => TasksController()..loadTasks(),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Completed Tasks",
-                style: Theme.of(context).textTheme.bodyLarge,
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Completed Tasks",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            SizedBox(height: 18,),
+            Expanded(
+              child: Consumer<TasksController>(
+                builder: (BuildContext context, TasksController controller, _) {
+                  return TasksListWidget(
+                    tasks: controller.completedTasks,
+                    onChanged: (value , index) => controller.updateIsDoneOfTask(index , value , TaskStatus.completed),
+                    onDelete: controller.deleteTask,
+                    emptyMessage: "Tasks not found",
+                    onEdit: controller.loadTasks,
+                  );
+                },
               ),
-              SizedBox(height: 18,),
-              Expanded(
-                child: Consumer<TasksController>(
-                  builder: (BuildContext context, TasksController controller, _) {
-                    return TasksListWidget(
-                      tasks: controller.completedTasks,
-                      onChanged: (value , index) => controller.updateIsDoneOfTask(index , value , TaskStatus.completed),
-                      onDelete: controller.deleteTask,
-                      emptyMessage: "Tasks not found",
-                      onEdit: controller.loadTasks,
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
