@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,117 +17,110 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeController>(
       create: (context) => HomeController()..init(),
-      child: Consumer<HomeController>(
-        builder: (context , valueController , child) {
-          final HomeController controller = context.read<HomeController>();
-          return Scaffold(
-            body: SafeArea(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Padding(
+                            Selector<HomeController , File?>(
+                              selector: (BuildContext context, HomeController controller) => controller.profileImage,
+                              builder: (BuildContext context, File? image, Widget? child) {
+                                return Padding(
                                   padding: const EdgeInsets.only(
                                     right: 8.0,
                                     top: 14,
                                     bottom: 14,
                                   ),
                                   child: CircleAvatar(
-                                    backgroundImage: (valueController.profileImage == null)
+                                    backgroundImage: (image == null)
                                         ? AssetImage("assets/images/profile.png")
-                                        : FileImage(valueController.profileImage!),
+                                        : FileImage(image),
                                     radius: 25,
                                     backgroundColor: Colors.transparent,
                                   ),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Good Evening , ${valueController.username}',
-                                      style: Theme.of(context).textTheme.labelLarge,
-                                    ),
-                                    Text(
-                                      valueController.motivationQuote,
-                                      style: Theme.of(context).textTheme.labelSmall,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                );
+                              },
                             ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Yuhuu ,Your work Is',
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'almost done !',
-                                  style: Theme.of(context).textTheme.displayLarge,
+                                Selector<HomeController , String>(
+                                  selector: (BuildContext context, HomeController controller) => controller.username,
+                                  builder: (BuildContext context, String username, Widget? child) {
+                                    return Text(
+                                      'Good Evening , $username',
+                                      style: Theme.of(context).textTheme.labelLarge,
+                                    );
+                                  },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 8.0,
-                                    top: 4.5,
-                                    bottom: 4.5,
-                                  ),
-                                  child: CustomSvgPictureAsset(
-                                    path: 'assets/images/waving_hand.svg',
-                                    width: 32,
-                                    height: 32,
-                                  ),
+                                Selector<HomeController , String>(
+                                  selector: (BuildContext context, HomeController controller) => controller.motivationQuote,
+                                  builder: (BuildContext context, String motivationQuote, Widget? child) {
+                                    return Text(
+                                      motivationQuote,
+                                      style: Theme.of(context).textTheme.labelSmall,
+                                    );
+                                  },
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
-                            AchievedTasksWidget(
-                                totalDoneTasks: valueController.totalDoneTasks,
-                                totalTasks: valueController.totalTasks,
-                                percentOfDoneTasks: valueController.percentOfDone
-                            ),
-                            SizedBox(height: 10),
-                            HighPriorityTasksWidget(
-                              allTasks: valueController.tasks,
-                              onTap: (value, index) {
-                                controller.updateIsDoneOfTask(index, value);
-                              },
-                              refresh: () {
-                                controller.loadTasks();
-                              },
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "My Tasks",
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            SizedBox(height: 16),
                           ],
                         ),
-                      ),
-                      SliverTasksListWidget(
-                        tasks: valueController.tasks,
-                        onChanged: (value , index){
-                          controller.updateIsDoneOfTask(index, value);
-                        },
-                        onDelete: controller.deleteTask,
-                        onEdit: (){
-                          controller.loadTasks();
-                        },
-                      ),
-                    ],
+                        SizedBox(height: 16),
+                        Text(
+                          'Yuhuu ,Your work Is',
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'almost done !',
+                              style: Theme.of(context).textTheme.displayLarge,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 8.0,
+                                top: 4.5,
+                                bottom: 4.5,
+                              ),
+                              child: CustomSvgPictureAsset(
+                                path: 'assets/images/waving_hand.svg',
+                                width: 32,
+                                height: 32,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        AchievedTasksWidget(),
+                        SizedBox(height: 10),
+                        HighPriorityTasksWidget(),
+                        SizedBox(height: 10),
+                        Text(
+                          "My Tasks",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        SizedBox(height: 16),
+                      ],
+                    ),
                   ),
-                ),
+                  SliverTasksListWidget(),
+                ],
               ),
             ),
-            floatingActionButton: SizedBox(
+          ),
+        ),
+        floatingActionButton: Builder(
+          builder: (BuildContext contextController) {
+            return SizedBox(
               width: 168,
               height: 40,
               child: FloatingActionButton.extended(
@@ -137,15 +130,15 @@ class HomeScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => AddTaskScreen()),
                   );
                   if(result != null && result){
-                    controller.loadTasks();
+                    contextController.read<HomeController>().loadTasks();
                   }
                 },
                 label: Text('Add New Task'),
                 icon: Icon(Icons.add),
               ),
-            ),
-          );
-        }
+            );
+          },
+        ),
       ),
     );
   }
