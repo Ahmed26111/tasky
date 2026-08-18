@@ -31,7 +31,7 @@ class AddTaskScreen extends StatelessWidget {
                           CustomTextFormField(
                             controller: controller.taskNameController,
                             hintText: 'Finish UI design for login screen',
-                            titl4e: "Task Name",
+                            title: "Task Name",
                             validator: (String? value) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Please enter your task';

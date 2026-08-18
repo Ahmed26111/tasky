@@ -1,69 +1,30 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:tasky/core/utility/task_utility.dart';
-
+import 'package:provider/provider.dart';
+import 'package:tasky/core/enums/task_status_enum.dart';
+import 'package:tasky/features/tasks/tasks_controller.dart';
 import '../../core/components/tasks_list_widget.dart';
-import '../../core/constants/storage_key.dart';
-import '../../core/shared/shared_preferences_manager.dart';
-import '../../models/task_model.dart';
 
-class HighPriorityScreen extends StatefulWidget {
+class HighPriorityScreen extends StatelessWidget{
   const HighPriorityScreen({super.key});
 
   @override
-  State<HighPriorityScreen> createState() => _HighPriorityScreenState();
-}
-
-class _HighPriorityScreenState extends State<HighPriorityScreen> {
-  List<TaskModel> _highPriorityTasks = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
-
-  void _loadTasks() async {
-    final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
-    if (tasksBeforeDecode != null) {
-      final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
-      setState(() {
-        _highPriorityTasks = tasksAfterDecode
-            .map((element) => TaskModel.fromJson(element))
-            .where((task) => (task.isHighPriority))
-            .toList();
-      });
-    }
-  }
-
-  void _updateIsDoneOfTask(int index, bool? value) async {
-    setState(() {
-      TaskUtility.updateIsDoneTaskInDatabase(value, index, _highPriorityTasks);
-    });
-    _loadTasks(); //? refresh screen
-  }
-
-  void _deleteTask(int id) async {
-    TaskUtility.deleteTaskFromDatabase(id);
-    _loadTasks(); //? Refresh Screen
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("High Priority Tasks")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: TasksListWidget(
-          tasks: _highPriorityTasks,
-          onChanged: (value, index) {
-            _updateIsDoneOfTask(index, value);
-          },
-          onEdit: () {
-            _loadTasks();
-          },
-          onDelete: _deleteTask,
+    return ChangeNotifierProvider<TasksController>(
+      create: (_) => TasksController()..loadTasks(),
+      child: Scaffold(
+        appBar: AppBar(title: Text("High Priority Tasks")),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Consumer<TasksController>(
+            builder: (BuildContext context, TasksController controller,_) {
+              return TasksListWidget(
+                tasks: controller.highPriorityTasks,
+                onChanged: (value, index) => controller.updateIsDoneOfTask(index, value , TaskStatus.highPriority),
+                onEdit:controller.loadTasks,
+                onDelete: controller.deleteTask,
+              );
+            },
+          ),
         ),
       ),
     );

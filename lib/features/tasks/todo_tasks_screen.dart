@@ -1,82 +1,44 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:tasky/features/tasks/tasks_controller.dart';
 import '../../core/components/tasks_list_widget.dart';
-import '../../core/constants/storage_key.dart';
-import '../../core/shared/shared_preferences_manager.dart';
-import '../../core/utility/task_utility.dart';
-import '../../models/task_model.dart';
+import '../../core/enums/task_status_enum.dart';
 
-class TodoTasksScreen extends StatefulWidget {
+class TodoTasksScreen extends StatelessWidget{
   const TodoTasksScreen({super.key});
 
   @override
-  State<TodoTasksScreen> createState() => _TodoTasksScreenState();
-}
-
-class _TodoTasksScreenState extends State<TodoTasksScreen> {
-  List<TaskModel> _todoTasks = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
-
-  void _loadTasks() async {
-
-    final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
-    if (tasksBeforeDecode != null) {
-      final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
-      setState(() {
-        _todoTasks = tasksAfterDecode.map((element) => TaskModel.fromJson(element)).where((task) => !task.isDone).toList();
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "To Do Tasks",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            SizedBox(height: 18,),
-            Expanded(
-              child: TasksListWidget(
-                tasks: _todoTasks,
-                onChanged: (value , index){
-                  _updateIsDoneTask(value, index);
-                },
-                onEdit: (){
-                  _loadTasks();
-                },
-                onDelete: _deleteTask,
-                emptyMessage: "Tasks not found",
+    return ChangeNotifierProvider<TasksController>(
+      create: (_) => TasksController()..loadTasks(),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "To Do Tasks",
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
-            ),
-          ],
+              SizedBox(height: 18,),
+              Expanded(
+                child: Consumer<TasksController>(
+                  builder: (BuildContext context, TasksController controller, Widget? child) {
+                    return TasksListWidget(
+                      tasks: controller.todoTasks,
+                      onChanged: (value , index)=> controller.updateIsDoneOfTask(index , value , TaskStatus.todo),
+                      onEdit: controller.loadTasks,
+                      onDelete: controller.deleteTask,
+                      emptyMessage: "Tasks not found",
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  void _updateIsDoneTask(bool? value , int index) async{
-    setState(() {
-      TaskUtility.updateIsDoneTaskInDatabase(value, index, _todoTasks);
-    });
-    _loadTasks(); //? Refresh Screen
-  }
-
-  void _deleteTask(int id)async{
-    TaskUtility.deleteTaskFromDatabase(id);
-    _loadTasks(); //? Refresh Screen
-  }
-
 }
