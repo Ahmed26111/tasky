@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData lightTheme(BuildContext context){
   return ThemeData(
@@ -17,7 +18,7 @@ ThemeData lightTheme(BuildContext context){
       backgroundColor:  Color(0xFFF6F7F9),
       centerTitle: true,
       foregroundColor: Color(0xFF161F1B),
-      titleTextStyle: TextStyle(fontSize: 20, color: Color(0xFF161F1B), fontWeight: FontWeight.w400),
+      titleTextStyle: TextStyle(fontSize: 20.sp, color: Color(0xFF161F1B), fontWeight: FontWeight.w400),
     ),
     switchTheme: SwitchThemeData(
       trackColor: WidgetStateProperty.resolveWith<Color>((states){
@@ -54,17 +55,17 @@ ThemeData lightTheme(BuildContext context){
               Color(0xFFFFFFFF)
           ),
           fixedSize: WidgetStateProperty.all<Size>(
-              Size(MediaQuery.of(context).size.width, 40)
+              Size(MediaQuery.of(context).size.width, 40.h)
           ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)
+                  borderRadius: BorderRadius.circular(100.r)
               )
           ),
           textStyle: WidgetStateProperty.all<TextStyle>(
               TextStyle(
                   color: Color(0xFFFFFFFF),
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500
               )
           ),
@@ -79,43 +80,43 @@ ThemeData lightTheme(BuildContext context){
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
-        fontSize: 32,
+        fontSize: 32.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF161F1B),
       ),
       displayMedium: TextStyle(
-        fontSize: 28,
+        fontSize: 28.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF161F1B),
       ),
       displaySmall: TextStyle(
-        fontSize: 24,
+        fontSize: 24.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF161F1B),
       ),
       bodyLarge: TextStyle(
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w400,
           color: Color(0xFF161F1B)
       ),
       labelLarge: TextStyle(
         color: Color(0xFF161F1B),
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
       ),
       labelMedium: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF161F1B),
       ),
       labelSmall: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF3A4640),
       ),
       //? selected text font
       headlineMedium: TextStyle(
-        fontSize: 16,
+        fontSize: 16.sp,
         decoration: TextDecoration.lineThrough,
         decorationColor: const Color(0xFF6A6A6A),
         fontWeight: FontWeight.w400,
@@ -125,44 +126,44 @@ ThemeData lightTheme(BuildContext context){
       headlineSmall: TextStyle(
         color: Color(0xFF15B86C),
         fontWeight: FontWeight.w400,
-        fontSize: 14,
+        fontSize: 14.sp,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Color(0xFFFFFFFF),
       hintStyle: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF9E9E9E),
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: Color(0xFFD1DAD6),
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: Color(0xFFD1DAD6),
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: Color(0xFFD1DAD6),
         ),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
             color: Colors.redAccent,
             width: 0.5
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
             color: Colors.redAccent,
             width: 0.5
@@ -176,7 +177,7 @@ ThemeData lightTheme(BuildContext context){
     ),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(4.r),
       ),
       side: BorderSide(
           color: Color(0xFFD1DAD6),
@@ -196,9 +197,9 @@ ThemeData lightTheme(BuildContext context){
       backgroundColor: Color(0xFF15B86C),
       foregroundColor: Color(0xFFFFFCFC),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(30.r),
       ),
-      extendedTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+      extendedTextStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Color(0xFF15B86C),
@@ -210,7 +211,7 @@ ThemeData lightTheme(BuildContext context){
         titleTextStyle: TextStyle(
           color: Color(0xFF161F1B),
           fontWeight: FontWeight.w400,
-          fontSize: 16,
+          fontSize: 16.sp,
         ),
         iconColor: Color(0xFF3A4640)
     ),
@@ -232,12 +233,12 @@ ThemeData lightTheme(BuildContext context){
               color: Color(0xFFD1DAD6),
               width: 0.7
             ),
-            borderRadius: BorderRadius.circular(20)
+            borderRadius: BorderRadius.circular(20.r)
         ),
         elevation: 3,
         shadowColor: Color(0xFFD1DAD6),
         textStyle: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w400,
             color: Color(0xFF161F1B)
         ),

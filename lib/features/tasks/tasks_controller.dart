@@ -25,7 +25,7 @@ class TasksController with ChangeNotifier{
       todoTasks = tasks.where((task) => !task.isDone).toList();
       completedTasks = tasks.where((task) => task.isDone).toList();
       highPriorityTasks = tasks.where((task) => task.isHighPriority).toList();
-      calculateDoneTasksPercent();
+      _calculateDoneTasksPercent();
     }
     notifyListeners();
   }
@@ -46,7 +46,7 @@ class TasksController with ChangeNotifier{
     loadTasks(); //? Refresh Screen
   }
 
-  void calculateDoneTasksPercent() {
+  void _calculateDoneTasksPercent() {
     totalTasks = tasks.length;
     totalDoneTasks = completedTasks.length;
     percentOfDone = (totalTasks == 0) ? 0 : totalDoneTasks / totalTasks;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/constants/storage_key.dart';
 import 'package:tasky/core/shared/shared_preferences_manager.dart';
@@ -12,6 +13,7 @@ import 'package:tasky/features/welcome/welcome_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   await SharedPreferencesManager().init();
   ThemeController.init();
   final String? username = SharedPreferencesManager().getString(StorageKey.usernameKey);
@@ -31,13 +33,19 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context , ThemeMode value , Widget? child) {
         return ChangeNotifierProvider<TasksController>(
           create: (_) => TasksController()..loadTasks(),
-          child: MaterialApp(
-            title: 'Tasky',
-            debugShowCheckedModeBanner: false,
-            theme: lightTheme(context),
-            darkTheme: darkTheme(context),
-            themeMode: value,
-            home: (username != null) ? MainScreen() : WelcomeScreen(),
+          child: ScreenUtilInit(
+            designSize: Size(375, 809),
+            minTextAdapt: true,
+            builder: (context , _){
+              return MaterialApp(
+                title: 'Tasky',
+                debugShowCheckedModeBanner: false,
+                theme: lightTheme(context),
+                darkTheme: darkTheme(context),
+                themeMode: value,
+                home: (username != null) ? MainScreen() : WelcomeScreen(),
+              );
+            },
           ),
         );
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ThemeData darkTheme(BuildContext context){
   return ThemeData(
@@ -17,7 +18,7 @@ ThemeData darkTheme(BuildContext context){
       backgroundColor:  Color(0xFF181818),
       centerTitle: true,
       foregroundColor: Color(0xFFFFFCFC),
-      titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+      titleTextStyle: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
     ),
     switchTheme: SwitchThemeData(
       trackColor: WidgetStateProperty.resolveWith<Color>((states){
@@ -54,17 +55,17 @@ ThemeData darkTheme(BuildContext context){
               Color(0xFFFFFCFC)
           ),
           fixedSize: WidgetStateProperty.all<Size>(
-              Size(MediaQuery.of(context).size.width, 40)
+              Size(MediaQuery.of(context).size.width, 40.h)
           ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)
+                  borderRadius: BorderRadius.circular(100.r)
               )
           ),
           textStyle: WidgetStateProperty.all<TextStyle>(
               TextStyle(
                   color: Color(0xFFFFFCFC),
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500
               )
           ),
@@ -79,43 +80,43 @@ ThemeData darkTheme(BuildContext context){
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
-        fontSize: 32,
+        fontSize: 32.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFFFFFCFC),
       ),
       displayMedium: TextStyle(
-        fontSize: 28,
+        fontSize: 28.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFFFFFFFF),
       ),
       displaySmall: TextStyle(
-        fontSize: 24,
+        fontSize: 24.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFFFFFCFC),
       ),
       bodyLarge: TextStyle(
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w400,
           color: Color(0xFFFFFCFC)
       ),
       labelLarge: TextStyle(
         color: Color(0xFFFFFCFC),
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
       ),
       labelMedium: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFFFFFFFF),
       ),
       labelSmall: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFFC6C6C6),
       ),
       //? selected text font
       headlineMedium: TextStyle(
-        fontSize: 16,
+        fontSize: 16.sp,
         decoration: TextDecoration.lineThrough,
         decorationColor: const Color(0xFFC6C6C6),
         fontWeight: FontWeight.w400,
@@ -125,30 +126,30 @@ ThemeData darkTheme(BuildContext context){
       headlineSmall: TextStyle(
         color: Color(0xFF15B86C),
         fontWeight: FontWeight.w400,
-        fontSize: 14,
+        fontSize: 14.sp,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: Color(0xFF282828),
       hintStyle: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: Color(0xFF6D6D6D),
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide.none,
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: Colors.redAccent,
           width: 0.5
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         borderSide: BorderSide(
           color: Colors.redAccent,
           width: 0.5
@@ -162,7 +163,7 @@ ThemeData darkTheme(BuildContext context){
     ),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(4.r),
       ),
       side: BorderSide(
           color: Color(0xFF6E6E6E),
@@ -182,9 +183,9 @@ ThemeData darkTheme(BuildContext context){
       backgroundColor: Color(0xFF15B86C),
       foregroundColor: Color(0xFFFFFCFC),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(30.r),
       ),
-      extendedTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+      extendedTextStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: Color(0xFF15B86C),
@@ -196,7 +197,7 @@ ThemeData darkTheme(BuildContext context){
       titleTextStyle: TextStyle(
         color: Color(0xFFFFFCFC),
         fontWeight: FontWeight.w400,
-        fontSize: 16,
+        fontSize: 16.sp,
       ),
       iconColor: Color(0xFFC6C6C6),
     ),
@@ -214,11 +215,11 @@ ThemeData darkTheme(BuildContext context){
     popupMenuTheme: PopupMenuThemeData(
       color: Color(0xFF282828),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)
+        borderRadius: BorderRadius.circular(20.r)
       ),
       elevation: 3,
       textStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w400,
           color: Color(0xFFFFFCFC)
       ),

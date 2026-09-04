@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 import 'package:tasky/features/navigation/main_screen.dart';
@@ -29,20 +35,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                          right: 16,
-                          top: 9,
-                          bottom: 9,
+                        padding: EdgeInsets.only(
+                          right: 16.w,
+                          top: 9.h,
+                          bottom: 9.h,
                         ),
                         child: CustomSvgPictureAsset(
                           path: 'assets/images/logo.svg',
-                          width: 42,
-                          height: 42,
+                          width: 42.w,
+                          height: 42.h,
                         ),
                       ),
                       Text(
@@ -51,15 +57,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 80),
+                  SizedBox(height: 80.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                          right: 8.0,
-                          top: 2,
-                          bottom: 2,
+                        padding:  EdgeInsets.only(
+                          right: 8.0.w,
+                          top: 2.h,
+                          bottom: 2.h,
                         ),
                         child: Text(
                           'Welcome to Tasky',
@@ -68,27 +74,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       CustomSvgPictureAsset(
                         path: 'assets/images/waving_hand.svg',
-                        width: 28,
-                        height: 28,
+                        width: 28.w,
+                        height: 28.w,
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     'Your productivity journey starts here.',
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontSize: 16
+                      fontSize: 16.sp
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   CustomSvgPictureAsset(
                     path: 'assets/images/pana.svg',
-                    width: 216,
-                    height: 204,
+                    width: 216.w,
+                    height: 204.h,
                   ),
-                  SizedBox(height: 28),
+                  SizedBox(height: 28.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding:  EdgeInsets.symmetric(horizontal: 16.0.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -103,7 +109,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         FilledButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
