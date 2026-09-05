@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 import 'package:tasky/features/add_task/add_task_controller.dart';
@@ -15,9 +16,9 @@ class AddTaskScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(title: Text('New Task')),
           body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: 16.0.w,
+              vertical: 8.0.h,
             ),
             child: Form(
               key: controller.globalKey,
@@ -39,7 +40,7 @@ class AddTaskScreen extends StatelessWidget {
                               return null;
                             },
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           CustomTextFormField(
                             controller: controller.taskDescriptionController,
                             hintText:
@@ -47,7 +48,7 @@ class AddTaskScreen extends StatelessWidget {
                             title: "Task Description",
                             maxLines: 5,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -71,9 +72,9 @@ class AddTaskScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 10,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 6.w,
+                      vertical: 10.h,
                     ),
                     child: FilledButton(
                       onPressed: () async {
@@ -83,7 +84,7 @@ class AddTaskScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.add),
-                          SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text("Add Task"),
                         ],
                       ),

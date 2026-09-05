@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/features/tasks/tasks_controller.dart';
 import '../../core/components/tasks_list_widget.dart';
@@ -10,7 +11,7 @@ class CompletedTasksScreen extends StatelessWidget{
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -18,7 +19,7 @@ class CompletedTasksScreen extends StatelessWidget{
               "Completed Tasks",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            SizedBox(height: 18,),
+            SizedBox(height: 18.h,),
             Expanded(
               child: Consumer<TasksController>(
                 builder: (BuildContext context, TasksController controller, _) {

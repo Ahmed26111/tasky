@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
@@ -26,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: controller,
           decoration: InputDecoration(hintText: hintText,),

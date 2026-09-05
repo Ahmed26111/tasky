@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/enums/task_status_enum.dart';
 import 'package:tasky/features/tasks/tasks_controller.dart';
@@ -12,7 +13,7 @@ class HighPriorityScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: Text("High Priority Tasks")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16).r,
         child: Consumer<TasksController>(
           builder: (BuildContext context, TasksController controller,_) {
             return TasksListWidget(

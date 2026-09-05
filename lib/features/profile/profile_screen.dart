@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
@@ -62,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return (isLoading)
         ? Center(child: CircularProgressIndicator())
         : Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16).r,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -70,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   "My Profile",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                SizedBox(height: 18),
+                SizedBox(height: 18.h),
                 Center(
                   child: Column(
                     children: [
@@ -82,12 +83,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               "assets/images/profile.png",
                             )
                                 : FileImage(selectedImage!),
-                            radius: 60,
+                            radius: 60.r,
                             backgroundColor: Colors.transparent,
                           ),
                           Positioned(
                             right: 0,
-                            bottom: -3,
+                            bottom: -3.h,
                             child: IconButton.filled(
                               onPressed: (){
                                 _showImageSourceDialog(
@@ -104,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 backgroundColor: const Color(0xFF282828),
                                 foregroundColor: const Color(0xFFC6C6C6),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30.r),
                                 ),
                                 side: BorderSide(
                                   color: Color(0xFF6E6E6E),
@@ -114,7 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 backgroundColor: const Color(0xFFFFFFFF),
                                 foregroundColor: const Color(0xFF6A6A6A),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(30.r),
                                 ),
                                 side: BorderSide(
                                     color: const Color(0xFFD1DAD6),
@@ -123,13 +124,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               icon: Icon(
                                 Icons.camera_alt_outlined,
-                                size: 25,
+                                size: 25.sp,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: 4.h),
                       Text(
                         _username,
                         style: Theme.of(context).textTheme.bodyLarge,
@@ -141,12 +142,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 Text(
                   "Profile Info",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 ListTile(
                   onTap: () async {
                     final bool result = await Navigator.push(
@@ -170,7 +171,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: Text("User Details"),
                   trailing: Icon(
                     Icons.arrow_forward,
-                    size: 25,
+                    size: 25.sp,
                   ),
                 ),
                 Divider(),
@@ -179,7 +180,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Icon(
                     Icons.dark_mode_outlined,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    size: 27,
+                    size: 27.sp,
                   ),
                   title: Text("Dark Mode"),
                   trailing: ValueListenableBuilder<ThemeMode>(
@@ -213,12 +214,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Icon(
                     Icons.logout,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    size: 27,
+                    size: 27.sp,
                   ),
                   title: Text("Log Out"),
                   trailing: Icon(
                     Icons.arrow_forward,
-                    size: 25,
+                    size: 25.sp,
                   ),
                 ),
               ],
@@ -246,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               children: [
                 Icon(Icons.camera_alt_rounded),
-                SizedBox(width: 8,),
+                SizedBox(width: 8.w,),
                 Text("Camera")
               ],
             ),
@@ -263,7 +264,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               children: [
                 Icon(Icons.photo_library),
-                SizedBox(width: 8,),
+                SizedBox(width: 8.w,),
                 Text("Gallery")
               ],
             ),

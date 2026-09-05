@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
 import 'package:tasky/features/tasks/tasks_controller.dart';
@@ -13,7 +14,7 @@ class SliverTasksListWidget extends StatelessWidget {
       builder: (BuildContext context, TasksController controller, Widget? child) {
         return (controller.tasks.isNotEmpty)
                 ? SliverPadding(
-                    padding: const EdgeInsets.only(bottom: 50),
+                    padding: EdgeInsets.only(bottom: 50.h),
                     sliver: SliverList.separated(
                       itemCount: controller.tasks.length,
                       itemBuilder: (context, index) {
@@ -26,7 +27,7 @@ class SliverTasksListWidget extends StatelessWidget {
                           onEdit: controller.loadTasks,
                         );
                       },
-                      separatorBuilder: (context, index) => SizedBox(height: 8),
+                      separatorBuilder: (context, index) => SizedBox(height: 8.h),
                     ),
                   )
                 : SliverToBoxAdapter(

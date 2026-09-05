@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/models/task_model.dart';
@@ -21,11 +22,11 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 72,
+      height: 72.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20).r,
         border: ThemeController.isDarkThemeMode() ? null : Border.all(
           color: Color(0xFFD1DAD6)
         ),
@@ -132,11 +133,11 @@ class TaskItemWidget extends StatelessWidget {
         builder: (context) => StatefulBuilder(
           builder: (context , setState) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.h),
               child: Form(
                 key: globalKey,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 12 , left: 4 , right: 4),
+                  padding: EdgeInsets.only(top: 12.h , left: 4.w , right: 4.w),
                   child: Column(
                     children: [
                       Column(
@@ -153,14 +154,14 @@ class TaskItemWidget extends StatelessWidget {
                               return null;
                             },
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           CustomTextFormField(
                             controller: descriptionController,
                             hintText: 'Finish onboarding UI and hand off to devs by Thursday.',
                             title: "Task Description",
                             maxLines: 5,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -182,7 +183,7 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                       Spacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 6 , vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 6.w , vertical: 10.h),
                         child: FilledButton(
                           onPressed: () async {
                             if (globalKey.currentState?.validate() ?? false) {
@@ -221,7 +222,7 @@ class TaskItemWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.edit),
-                              SizedBox(width: 8,),
+                              SizedBox(width: 8.w,),
                               Text("Edit Task"),
                             ],
                           ),

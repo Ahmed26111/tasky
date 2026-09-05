@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
 import 'package:tasky/core/enums/task_status_enum.dart';
@@ -18,10 +19,10 @@ class HighPriorityTasksWidget extends StatelessWidget {
         return Card(
           color: Theme.of(context).colorScheme.primaryContainer,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: EdgeInsets.all(12.0).r,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -31,7 +32,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                         child: Text(
                           "High Priority Tasks",
                           style: Theme
@@ -40,7 +41,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                               .headlineSmall,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.h),
                       (taskPriority.isNotEmpty)
                           ? ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -93,7 +94,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
 
                 // 2. The Icon (Added on the right side)
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: IconButton.outlined(
                     onPressed: () async{
                       await Navigator.push(
@@ -109,7 +110,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                       backgroundColor: const Color(0xFF282828),
                       foregroundColor: const Color(0xFFC6C6C6),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       side: BorderSide(
                         color: Color(0xFF6E6E6E),
@@ -119,7 +120,7 @@ class HighPriorityTasksWidget extends StatelessWidget {
                       backgroundColor: const Color(0xFFFFFFFF),
                       foregroundColor: const Color(0xFF6A6A6A),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                       side: BorderSide(
                           color: const Color(0xFFD1DAD6),

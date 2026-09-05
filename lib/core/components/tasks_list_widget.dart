@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/components/task_item_widget.dart';
 import 'package:tasky/models/task_model.dart';
 
@@ -27,7 +28,7 @@ class TasksListWidget extends StatelessWidget {
             shrinkWrap: isShrinkWrap,
             physics: (isShrinkWrap) ? NeverScrollableScrollPhysics() : null,
             itemCount: tasks.length,
-            padding: const EdgeInsets.only(bottom: 45),
+            padding: EdgeInsets.only(bottom: 45.h),
             itemBuilder: (context, index) {
               return TaskItemWidget(
                   taskModel: tasks[index],
@@ -38,7 +39,7 @@ class TasksListWidget extends StatelessWidget {
                   onEdit: onEdit,
               );
             },
-            separatorBuilder: (context, index) => SizedBox(height: 8),
+            separatorBuilder: (context, index) => SizedBox(height: 8.h),
           )
         : Center(
             child: Text(

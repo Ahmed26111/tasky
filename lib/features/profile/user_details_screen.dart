@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
 
 import '../../core/constants/storage_key.dart';
@@ -45,7 +46,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("User Details")),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16).r,
         child: Form(
           key: _globalKey,
           child: Column(
@@ -61,7 +62,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 20.h,),
               CustomTextFormField(
                 controller: _motivationQuoteController,
                 hintText: "One task at a time. One step closer.",
@@ -76,7 +77,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.all(4),
+                padding: EdgeInsets.all(4).r,
                 child: FilledButton(
                   onPressed: () async {
                     if (_globalKey.currentState?.validate() ?? false){
