@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/core/Widgets/custom_text_form_field.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/features/navigation/main_screen.dart';
-
 import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 
@@ -35,20 +29,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 16.h),
+                  SizedBox(height: AppSizes.h16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          right: 16.w,
-                          top: 9.h,
-                          bottom: 9.h,
+                          right: AppSizes.pw16,
+                          top: AppSizes.ph9,
+                          bottom: AppSizes.ph9,
                         ),
                         child: CustomSvgPictureAsset(
                           path: 'assets/images/logo.svg',
-                          width: 42.w,
-                          height: 42.h,
+                          width: AppSizes.w42,
+                          height: AppSizes.h42,
                         ),
                       ),
                       Text(
@@ -57,15 +51,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 80.h),
+                  SizedBox(height: AppSizes.h80),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
                         padding:  EdgeInsets.only(
-                          right: 8.0.w,
-                          top: 2.h,
-                          bottom: 2.h,
+                          right: AppSizes.pw8,
+                          top: AppSizes.ph2,
+                          bottom: AppSizes.ph2,
                         ),
                         child: Text(
                           'Welcome to Tasky',
@@ -74,27 +68,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       CustomSvgPictureAsset(
                         path: 'assets/images/waving_hand.svg',
-                        width: 28.w,
-                        height: 28.w,
+                        width: AppSizes.w28,
+                        height: AppSizes.h28,
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: AppSizes.h8),
                   Text(
                     'Your productivity journey starts here.',
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontSize: 16.sp
+                      fontSize: AppSizes.sp16
                     ),
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: AppSizes.h24),
                   CustomSvgPictureAsset(
                     path: 'assets/images/pana.svg',
-                    width: 216.w,
-                    height: 204.h,
+                    width: AppSizes.w216,
+                    height: AppSizes.h204,
                   ),
-                  SizedBox(height: 28.h),
+                  SizedBox(height: AppSizes.h28),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 16.0.w),
+                    padding:  EdgeInsets.symmetric(horizontal: AppSizes.pw16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -109,7 +103,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 24.h),
+                        SizedBox(height: AppSizes.h24),
                         FilledButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {

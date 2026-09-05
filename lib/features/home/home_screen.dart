@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/features/home/components/achieved_tasks_widget.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/features/home/home_controller.dart';
@@ -23,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.all(16.0).r,
+              padding: EdgeInsets.all(AppSizes.pw16),
               child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
@@ -37,15 +36,15 @@ class HomeScreen extends StatelessWidget {
                               builder: (BuildContext context, File? image, Widget? child) {
                                 return Padding(
                                   padding: EdgeInsets.only(
-                                    right: 8.0.w,
-                                    top: 14.h,
-                                    bottom: 14.h,
+                                    right: AppSizes.pw8,
+                                    top: AppSizes.ph14,
+                                    bottom: AppSizes.ph14,
                                   ),
                                   child: CircleAvatar(
                                     backgroundImage: (image == null)
                                         ? AssetImage("assets/images/profile.png")
                                         : FileImage(image),
-                                    radius: 25.r,
+                                    radius: AppSizes.r25,
                                     backgroundColor: Colors.transparent,
                                   ),
                                 );
@@ -76,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 16.h),
+                        SizedBox(height: AppSizes.h16),
                         Text(
                           'Yuhuu ,Your work Is',
                           style: Theme.of(context).textTheme.displayLarge,
@@ -89,28 +88,28 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                left: 8.0.w,
-                                top: 4.5.h,
-                                bottom: 4.5.h,
+                                left: AppSizes.pw8,
+                                top: AppSizes.ph4_5,
+                                bottom: AppSizes.ph4_5,
                               ),
                               child: CustomSvgPictureAsset(
                                 path: 'assets/images/waving_hand.svg',
-                                width: 32.w,
-                                height: 32.h,
+                                width: AppSizes.w32,
+                                height: AppSizes.h32,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: AppSizes.h20),
                         AchievedTasksWidget(),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: AppSizes.h10),
                         HighPriorityTasksWidget(),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: AppSizes.h10),
                         Text(
                           "My Tasks",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
-                        SizedBox(height: 16.h),
+                        SizedBox(height: AppSizes.h16),
                       ],
                     ),
                   ),
@@ -123,8 +122,8 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: Builder(
           builder: (BuildContext contextController) {
             return SizedBox(
-              width: 168.w,
-              height: 40.h,
+              width: AppSizes.w168,
+              height: AppSizes.h40,
               child: FloatingActionButton.extended(
                 onPressed: () async{
                   final bool ? result = await Navigator.push(

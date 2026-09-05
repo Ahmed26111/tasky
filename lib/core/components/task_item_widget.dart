@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
+import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/models/task_model.dart';
-
 import '../constants/storage_key.dart';
 import '../enums/task_popup_menu_enum.dart';
 import '../shared/shared_preferences_manager.dart';
@@ -22,11 +20,11 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 72.h,
+      height: AppSizes.h72,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(20).r,
+        borderRadius: BorderRadius.circular(AppSizes.r20),
         border: ThemeController.isDarkThemeMode() ? null : Border.all(
           color: Color(0xFFD1DAD6)
         ),
@@ -133,11 +131,11 @@ class TaskItemWidget extends StatelessWidget {
         builder: (context) => StatefulBuilder(
           builder: (context , setState) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.h),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.pw16, vertical: AppSizes.ph8),
               child: Form(
                 key: globalKey,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 12.h , left: 4.w , right: 4.w),
+                  padding: EdgeInsets.only(top: AppSizes.ph12, left: AppSizes.pw4, right: AppSizes.pw4),
                   child: Column(
                     children: [
                       Column(
@@ -154,14 +152,14 @@ class TaskItemWidget extends StatelessWidget {
                               return null;
                             },
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: AppSizes.h20),
                           CustomTextFormField(
                             controller: descriptionController,
                             hintText: 'Finish onboarding UI and hand off to devs by Thursday.',
                             title: "Task Description",
                             maxLines: 5,
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: AppSizes.h20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -183,7 +181,7 @@ class TaskItemWidget extends StatelessWidget {
                       ),
                       Spacer(),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 6.w , vertical: 10.h),
+                        padding: EdgeInsets.symmetric(horizontal: AppSizes.pw6, vertical: AppSizes.ph10),
                         child: FilledButton(
                           onPressed: () async {
                             if (globalKey.currentState?.validate() ?? false) {
@@ -222,7 +220,7 @@ class TaskItemWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.edit),
-                              SizedBox(width: 8.w,),
+                              SizedBox(width: AppSizes.w8,),
                               Text("Edit Task"),
                             ],
                           ),
