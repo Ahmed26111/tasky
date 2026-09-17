@@ -33,4 +33,8 @@ class FileStorageManager {
     }
   }
 
+  Future<void> deleteTasks()async{
+    await _tasksFile.delete();
+  }
+
 }

@@ -6,6 +6,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/models/task_model.dart';
 import '../constants/storage_key.dart';
 import '../enums/task_popup_menu_enum.dart';
+import '../shared/file_storage_manager.dart';
 import '../shared/shared_preferences_manager.dart';
 import '../Widgets/custom_text_form_field.dart';
 
@@ -187,13 +188,18 @@ class TaskItemWidget extends StatelessWidget {
                             if (globalKey.currentState?.validate() ?? false) {
                               List<TaskModel> tasks = [];
 
-                              final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
+                              // final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
+                              //
+                              // if (tasksBeforeDecode != null) {
+                              //   tasks = (jsonDecode(tasksBeforeDecode) as List<dynamic>).map(
+                              //       (item)=>TaskModel.fromJson(item)
+                              //   ).toList();
+                              // }
 
-                              if (tasksBeforeDecode != null) {
-                                tasks = (jsonDecode(tasksBeforeDecode) as List<dynamic>).map(
-                                    (item)=>TaskModel.fromJson(item)
-                                ).toList();
-                              }
+
+                              tasks = (await FileStorageManager().loadTasks()).map(
+                                      (item)=>TaskModel.fromJson(item)
+                              ).toList();
 
                               TaskModel editedTask = TaskModel(
                                 id: model.id,
@@ -209,9 +215,11 @@ class TaskItemWidget extends StatelessWidget {
 
                               final tasksBeforeEnCode = tasks.map((task)=>task.toMap()).toList();
 
-                              final String tasksEncode = jsonEncode(tasksBeforeEnCode);
+                              await FileStorageManager().saveTask(tasksBeforeEnCode);
 
-                              await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
+                              // final String tasksEncode = jsonEncode(tasksBeforeEnCode);
+                              //
+                              // await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
 
                               Navigator.pop(context , true);
                             }

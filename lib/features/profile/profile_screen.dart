@@ -2,13 +2,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:tasky/core/Widgets/custom_svg_picture_asset.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/profile/user_details_screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 import '../../core/constants/storage_key.dart';
+import '../../core/shared/file_storage_manager.dart';
 import '../../core/shared/shared_preferences_manager.dart';
+import '../tasks/tasks_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -199,8 +202,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //! remove all data
                     await SharedPreferencesManager().remove(StorageKey.usernameKey);
                     await SharedPreferencesManager().remove(StorageKey.motivationQuoteKey);
-                    await SharedPreferencesManager().remove(StorageKey.tasksKey);
+                    // await SharedPreferencesManager().remove(StorageKey.tasksKey);
+                    await FileStorageManager().deleteTasks();
                     await SharedPreferencesManager().remove(StorageKey.imageKey);
+
+                    context.read<TasksController>().loadTasks();
 
                     Navigator.pushAndRemoveUntil(
                       context,
