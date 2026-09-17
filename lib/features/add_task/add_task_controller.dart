@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:tasky/core/shared/file_storage_manager.dart';
 
 import '../../core/constants/storage_key.dart';
 import '../../core/shared/shared_preferences_manager.dart';
@@ -17,11 +18,13 @@ class AddTaskController with ChangeNotifier{
 
       List<dynamic> tasks = [];
 
-      final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
+      // final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
+      //
+      // if (tasksBeforeDecode != null) {
+      //   tasks = jsonDecode(tasksBeforeDecode) as List<dynamic>;
+      // }
 
-      if (tasksBeforeDecode != null) {
-        tasks = jsonDecode(tasksBeforeDecode) as List<dynamic>;
-      }
+      tasks = await FileStorageManager().loadTasks();
 
       TaskModel newTask = TaskModel(
         id: tasks.length + 1,
@@ -32,8 +35,10 @@ class AddTaskController with ChangeNotifier{
 
       tasks.add(newTask.toMap());
 
-      final String tasksEncode = jsonEncode(tasks);
-      await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
+      // final String tasksEncode = jsonEncode(tasks);
+      // await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
+
+      await FileStorageManager().saveTask(tasks);
 
       Navigator.pop(context , true);
     }

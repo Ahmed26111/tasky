@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:tasky/core/shared/file_storage_manager.dart';
 import 'package:tasky/models/task_model.dart';
 import '../../core/constants/storage_key.dart';
 import '../../core/enums/task_status_enum.dart';
@@ -15,16 +16,17 @@ class TasksController with ChangeNotifier{
   int totalTasks = 0;
   double percentOfDone = 0;
 
-  void loadTasks(){
-    final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
-    if (tasksBeforeDecode != null) {
-      final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
+  Future<void> loadTasks() async {
+    // final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
+    // if (tasksBeforeDecode != null) {
+      // final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
+      final tasksAfterDecode = await FileStorageManager().loadTasks();
       tasks = tasksAfterDecode.map((element) => TaskModel.fromJson(element)).toList();
       todoTasks = tasks.where((task) => !task.isDone).toList();
       completedTasks = tasks.where((task) => task.isDone).toList();
       highPriorityTasks = tasks.where((task) => task.isHighPriority).toList();
       _calculateDoneTasksPercent();
-    }
+    // }
     notifyListeners();
   }
 
