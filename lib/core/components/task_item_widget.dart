@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tasky/core/Widgets/custom_check_box.dart';
 import 'package:tasky/core/constants/app_sizes.dart';
 import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/models/task_model.dart';
-import '../constants/storage_key.dart';
 import '../enums/task_popup_menu_enum.dart';
-import '../shared/file_storage_manager.dart';
-import '../shared/shared_preferences_manager.dart';
+import '../shared/hive_storage_manager.dart';
 import '../Widgets/custom_text_form_field.dart';
 
 class TaskItemWidget extends StatelessWidget {
@@ -74,7 +71,7 @@ class TaskItemWidget extends StatelessWidget {
                     onEdit();
                   }
                 case TaskPopupMenuEnum.delete:
-                  _showDeleteAlertDialog(context);
+                 await _showDeleteAlertDialog(context);
               }
             },
             itemBuilder: (context) => TaskPopupMenuEnum.values.map(
@@ -89,8 +86,8 @@ class TaskItemWidget extends StatelessWidget {
     );
   }
 
-  void _showDeleteAlertDialog(BuildContext context) {
-    showDialog(
+  Future<void> _showDeleteAlertDialog(BuildContext context) async {
+   await showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: Text("Delete Task"),
@@ -187,20 +184,7 @@ class TaskItemWidget extends StatelessWidget {
                           onPressed: () async {
                             if (globalKey.currentState?.validate() ?? false) {
                               List<TaskModel> tasks = [];
-
-                              // final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
-                              //
-                              // if (tasksBeforeDecode != null) {
-                              //   tasks = (jsonDecode(tasksBeforeDecode) as List<dynamic>).map(
-                              //       (item)=>TaskModel.fromJson(item)
-                              //   ).toList();
-                              // }
-
-
-                              tasks = (await FileStorageManager().loadTasks()).map(
-                                      (item)=>TaskModel.fromJson(item)
-                              ).toList();
-
+                              tasks = HiveStorageManager().loadTasks();
                               TaskModel editedTask = TaskModel(
                                 id: model.id,
                                 taskName: nameController.text,
@@ -208,19 +192,9 @@ class TaskItemWidget extends StatelessWidget {
                                 isHighPriority: isHighPriority,
                                 isDone: model.isDone
                               );
-
                               int indexOfEditedTask = tasks.indexWhere((task)=>task.id == model.id);
-
                               tasks[indexOfEditedTask] = editedTask;
-
-                              final tasksBeforeEnCode = tasks.map((task)=>task.toMap()).toList();
-
-                              await FileStorageManager().saveTask(tasksBeforeEnCode);
-
-                              // final String tasksEncode = jsonEncode(tasksBeforeEnCode);
-                              //
-                              // await SharedPreferencesManager().setString(StorageKey.tasksKey, tasksEncode);
-
+                              await HiveStorageManager().saveTask(tasks);
                               Navigator.pop(context , true);
                             }
                           },

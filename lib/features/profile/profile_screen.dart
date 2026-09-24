@@ -9,7 +9,7 @@ import 'package:tasky/core/theme/theme_controller.dart';
 import 'package:tasky/features/profile/user_details_screen.dart';
 import 'package:tasky/features/welcome/welcome_screen.dart';
 import '../../core/constants/storage_key.dart';
-import '../../core/shared/file_storage_manager.dart';
+import '../../core/shared/hive_storage_manager.dart';
 import '../../core/shared/shared_preferences_manager.dart';
 import '../tasks/tasks_controller.dart';
 
@@ -203,7 +203,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     await SharedPreferencesManager().remove(StorageKey.usernameKey);
                     await SharedPreferencesManager().remove(StorageKey.motivationQuoteKey);
                     // await SharedPreferencesManager().remove(StorageKey.tasksKey);
-                    await FileStorageManager().deleteTasks();
+                    await HiveStorageManager().deleteTasks();
                     await SharedPreferencesManager().remove(StorageKey.imageKey);
 
                     context.read<TasksController>().loadTasks();

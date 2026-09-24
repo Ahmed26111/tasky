@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:tasky/core/shared/file_storage_manager.dart';
+import 'package:tasky/core/shared/hive_storage_manager.dart';
 import 'package:tasky/models/task_model.dart';
-import '../../core/constants/storage_key.dart';
 import '../../core/enums/task_status_enum.dart';
-import '../../core/shared/shared_preferences_manager.dart';
 import '../../core/utility/task_utility.dart';
 
-class TasksController with ChangeNotifier{
+class TasksController with ChangeNotifier {
   List<TaskModel> tasks = [];
   List<TaskModel> todoTasks = [];
   List<TaskModel> completedTasks = [];
@@ -16,21 +13,16 @@ class TasksController with ChangeNotifier{
   int totalTasks = 0;
   double percentOfDone = 0;
 
-  Future<void> loadTasks() async {
-    // final tasksBeforeDecode = SharedPreferencesManager().getString(StorageKey.tasksKey);
-    // if (tasksBeforeDecode != null) {
-      // final tasksAfterDecode = jsonDecode(tasksBeforeDecode) as List<dynamic>;
-      final tasksAfterDecode = await FileStorageManager().loadTasks();
-      tasks = tasksAfterDecode.map((element) => TaskModel.fromJson(element)).toList();
-      todoTasks = tasks.where((task) => !task.isDone).toList();
-      completedTasks = tasks.where((task) => task.isDone).toList();
-      highPriorityTasks = tasks.where((task) => task.isHighPriority).toList();
-      _calculateDoneTasksPercent();
-    // }
+  void loadTasks() {
+    tasks = HiveStorageManager().loadTasks();
+    todoTasks = tasks.where((task) => !task.isDone).toList();
+    completedTasks = tasks.where((task) => task.isDone).toList();
+    highPriorityTasks = tasks.where((task) => task.isHighPriority).toList();
+    _calculateDoneTasksPercent();
     notifyListeners();
   }
 
-  void updateIsDoneOfTask(int index, bool? value , TaskStatus taskStatus){
+  void updateIsDoneOfTask(int index, bool? value, TaskStatus taskStatus) {
     final List<TaskModel> updatedTasks = switch (taskStatus) {
       TaskStatus.todo => todoTasks,
       TaskStatus.completed => completedTasks,
@@ -41,8 +33,9 @@ class TasksController with ChangeNotifier{
     loadTasks(); //? refresh screen
   }
 
-  void deleteTask(int id){
+  void deleteTask(int id) {
     TaskUtility.deleteTaskFromDatabase(id);
+    notifyListeners();
     loadTasks(); //? Refresh Screen
   }
 
@@ -51,5 +44,4 @@ class TasksController with ChangeNotifier{
     totalDoneTasks = completedTasks.length;
     percentOfDone = (totalTasks == 0) ? 0 : totalDoneTasks / totalTasks;
   }
-
 }

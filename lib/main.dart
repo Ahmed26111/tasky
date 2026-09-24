@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tasky/core/constants/storage_key.dart';
-import 'package:tasky/core/shared/file_storage_manager.dart';
+import 'package:tasky/core/shared/hive_storage_manager.dart';
 import 'package:tasky/core/shared/shared_preferences_manager.dart';
 import 'package:tasky/core/theme/dark_theme.dart';
 import 'package:tasky/core/theme/light_theme.dart';
@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await SharedPreferencesManager().init();
-  await FileStorageManager().init();
+  await HiveStorageManager().init();
   ThemeController.init();
   final String? username = SharedPreferencesManager().getString(StorageKey.usernameKey);
   runApp(MyApp(username: username));
