@@ -22,20 +22,19 @@ class TasksController with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateIsDoneOfTask(int index, bool? value, TaskStatus taskStatus) {
+  Future<void> updateIsDoneOfTask(int index, bool? value, TaskStatus taskStatus) async {
     final List<TaskModel> updatedTasks = switch (taskStatus) {
       TaskStatus.todo => todoTasks,
       TaskStatus.completed => completedTasks,
       TaskStatus.highPriority => highPriorityTasks,
       TaskStatus.all => tasks,
     };
-    TaskUtility.updateIsDoneTaskInDatabase(value, index, updatedTasks);
+    await TaskUtility.updateIsDoneTaskInDatabase(value, index, updatedTasks);
     loadTasks(); //? refresh screen
   }
 
-  void deleteTask(int id) {
-    TaskUtility.deleteTaskFromDatabase(id);
-    notifyListeners();
+  Future<void> deleteTask(int id) async {
+    await TaskUtility.deleteTaskFromDatabase(id);
     loadTasks(); //? Refresh Screen
   }
 
